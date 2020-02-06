@@ -12,7 +12,8 @@ public class ArrayDefinition {
         names[2] = "Monday";
         names[3] = "!";
 
-        for (int i = 0; i < names.length; i++)
+        for (int i = 0; i < names.length; i++) {
             System.out.print(names[i] + " ");
+        }
     }
 }
