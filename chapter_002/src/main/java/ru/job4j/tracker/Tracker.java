@@ -73,6 +73,18 @@ public class Tracker {
         return true;
     }
 
+    public boolean delete(String id) {
+        int insert = indexOf(id);
+        int start = insert + 1;
+        if (insert < 0) {
+            return false;
+        }
+        int size = position - insert;
+        System.arraycopy(items, start, items, insert, size);
+        items[position--] = null;
+        return true;
+    }
+
     /**
      * Метод генерирует уникальный ключ для заявки.
      * Так как у заявки нет уникальности полей, имени и описание. Для идентификации нам нужен уникальный ключ.
