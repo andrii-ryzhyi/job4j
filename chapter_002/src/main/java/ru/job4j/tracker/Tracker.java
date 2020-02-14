@@ -56,13 +56,21 @@ public class Tracker {
      * @return возвращает найденную заявку. Если заявка не найдена - возвращает null.
      */
     public Item findById(String id) {
-        for (int i = 0; i < this.position; i++) {
-            Item item = this.items[i];
-            if (item.getId().equals(id)) {
-                return item;
-            }
+        int index = indexOf(id);
+        if (index < 0) {
+            return null;
         }
-        return null;
+        return items[index];
+    }
+
+    public boolean replace(String id, Item item) {
+        int index = indexOf(id);
+        if (index < 0) {
+            return false;
+        }
+        item.setId(id);
+        items[index] = item;
+        return true;
     }
 
     /**
@@ -73,5 +81,16 @@ public class Tracker {
     private String generateId() {
         Random rm = new Random();
         return String.valueOf(rm.nextLong() + System.currentTimeMillis());
+    }
+
+    private int indexOf(String id) {
+        int rsl = -1;
+        for (int index = 0; index < position; index++) {
+            if (items[index].getId().equals(id)) {
+                rsl = index;
+                break;
+            }
+        }
+        return rsl;
     }
 }
