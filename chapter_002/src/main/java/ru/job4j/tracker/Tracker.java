@@ -29,15 +29,7 @@ public class Tracker {
      * @return Массив заявок
      */
     public Item[] findAll() {
-        Item[] itemsWithoutNull = new Item[this.items.length];
-        int size = 0;
-        for (int i = 0; i < this.items.length; i++) {
-            Item item  = this.items[i];
-            if (item != null) {
-                itemsWithoutNull[size++] = item;
-            }
-        }
-        return Arrays.copyOf(itemsWithoutNull, size);
+        return Arrays.copyOf(items, this.position);
     }
 
     /**
@@ -49,10 +41,9 @@ public class Tracker {
     public Item[] findByName(String key) {
         Item[] found = new Item[this.items.length];
         int size = 0;
-        for (int i = 0; i < this.items.length; i++) {
+        for (int i = 0; i < this.position; i++) {
             Item item = this.items[i];
-            if (item != null
-                    && item.getName().equals(key)) {
+            if (item.getName().equals(key)) {
                 found[size++] = item;
             }
         }
@@ -65,10 +56,9 @@ public class Tracker {
      * @return возвращает найденную заявку. Если заявка не найдена - возвращает null.
      */
     public Item findById(String id) {
-        for (int i = 0; i < this.items.length; i++) {
+        for (int i = 0; i < this.position; i++) {
             Item item = this.items[i];
-            if (item != null
-                    && item.getId().equals(id)) {
+            if (item.getId().equals(id)) {
                 return item;
             }
         }
